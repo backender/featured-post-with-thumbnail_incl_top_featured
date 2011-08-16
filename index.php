@@ -73,6 +73,71 @@ function catch_that_image() {
 }
 
 
+/* @mj:
+ * this is the function for the new topfeatured post.
+ * function is the same as the used featured post function.
+ * just gave the name "topfeatured_posts_YIW" instead of "featured_posts_YIW"
+ */
+function topfeatured_posts_YIW( $args = null ) {
+
+   global $featured_post_plugin_path;
+   $defaults = array(
+       'title'	      => 'Top Featured Posts',
+       'numberposts'  => 5,
+       'orderby'      => 'DESC',
+       'widththumb'   => 73,
+       'heightthumb'  => 73,
+       'beforetitle'  => '<h3>',
+       'aftertitle'   => '</h3>'
+   );
+
+   $fp = wp_parse_args($args, $defaults);
+   /* User-selected settings. */
+   $title	 = $fp['title'];
+   $showposts    = $fp['numberposts'];
+   $orderby      = $fp['orderby'];
+   $width_thumb  = $fp['widththumb'];
+   $height_thumb = $fp['heightthumb'];
+   $before_title = $fp['beforetitle'];
+   $after_title	 = $fp['aftertitle'];
+
+
+
+
+   /* Titolo del widget (before e after definiti dal tema). */
+   if ( ! empty($title) ) {
+      echo $before_title . $title . $after_title;
+   }
+
+   /*
+    * Modificare i parametri di questa funzione per mostrare/escludere categorie, pagine.
+    * If you want to exclude categories and/or pages modify this function's arguments properly
+    * Info: http://codex.wordpress.org/Template_Tags/get_posts
+    */
+   global $post;
+   $featured_posts = get_posts('meta_key=topfeatured&meta_value=1&numberposts='.$showposts.'&orderby='.$orderby); //@mj: meta_key changed to "topfeatured"
+
+   echo '<ul class="clearfix">';
+   foreach ($featured_posts as $post):
+      setup_postdata($post);
+      ?>
+<li>
+   
+	 <?php if ( (function_exists('the_post_thumbnail')) && (has_post_thumbnail()) ) :
+	    the_post_thumbnail(array($width_thumb,$height_thumb,true));
+	    else: ?>
+	    <img src="<?php echo $featured_post_plugin_path ?>scripts/timthumb.php?src=<?php echo catch_that_image() ?>&amp;h=<?php echo $height_thumb ?>&amp;w=<?php echo $width_thumb ?>&amp;zc=1" class="alignleft" alt="<?php the_title(); ?>" />
+	    <?php endif; ?>
+   <h4 class="featured-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+</li>
+   <?php
+   endforeach;
+   echo "</ul>";
+}
+?>
+
+
+<?
 /**
  *
  * Mostra i post in evidenza
