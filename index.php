@@ -324,6 +324,8 @@ class Featured_posts extends WP_Widget {
 }//end class Featured_posts
 
 /**
+ *@mj: Now we have to have a look at the "topfeatured" tag too!
+ *
  * Aggiunge/rimuove il campo personalizzato featured
  * Add/remove featured custom field
  *
@@ -334,9 +336,18 @@ function add_featured($post_ID) {
 
    if ($_POST['insert_featured_post'] == 'yes') {
       add_post_meta($articolo->ID, 'featured', 1, TRUE) or update_post_meta($articolo->ID, 'featured', 1);
+      delete_post_meta($articolo->ID, 'topfeatured'); // @mj: we have to delete the featured tag
    }
    elseif ( $_POST['insert_featured_post'] == 'no' ) {
       delete_post_meta($articolo->ID, 'featured');
+      delete_post_meta($articolo->ID, 'topfeatured'); // @mj: same here
+   }
+   /* @mj: here we generate the "topfeatured" meta and set it to 1
+    * for sure we must not forget to remove a possible featured tag at this time
+    */
+   elseif ( $_POST['insert_featured_post'] == 'top' ) {
+	  add_post_meta($articolo->ID, 'topfeatured', 1, TRUE) or update_post_meta($articolo->ID, 'topfeatured', 1);
+	  delete_post_meta($articolo->ID, 'featured');
    }
 }
 
@@ -348,11 +359,13 @@ function add_featured($post_ID) {
 function post_box() {
    global $post;
    $featured = get_post_meta($post->ID,featured,1);
+   $topfeatured = get_post_meta($post->ID,topfeatured,1); // @mj: check for topfeatured tag too
    ?>
 <label for="insert_featured_post"><?php _e('Featured post?','featured-post') ?></label>
 <select name="insert_featured_post" id="insert_featured_post">
+   <option value="top" <?php if ($topfeatured) echo 'selected="selected"'?>><?php _e('Top','featured-post') ?>&nbsp;</option> <?php // @mj: here we make a third option called "Top" ?>
    <option value="yes" <?php if ($featured) echo 'selected="selected"'?>><?php _e('Yes','featured-post') ?>&nbsp;</option>
-   <option value="no" <?php if (!$featured) echo 'selected="selected"'?>><?php _e('No ','featured-post') ?>&nbsp;</option>
+   <option value="no" <?php if (!$featured && !$topfeatured) echo 'selected="selected"'?>><?php _e('No ','featured-post') ?>&nbsp;</option> <?php // @mj: also an additional check for "topfeatured" ?>
 </select>
 <?php
 }
