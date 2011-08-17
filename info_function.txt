@@ -13,8 +13,6 @@ $args = array(
 	   'category'	   => '3' 
    );
 featured_posts_YIW( $args );   
-
-
 ?>
 
 By default:
@@ -22,7 +20,29 @@ By default:
  - the posts shown are 5
  - thumbnail's width and height is 73 pixel
  - the title is wrapped with an H3 tag
- 
+
+For the Topfeatured Posts use:
+<?php
+$args = array(
+       'title'	      => 'Top Featured Posts',
+       'numberposts'  => 5,
+       'orderby'      => 'DESC',
+       'widththumb'   => 73,
+       'heightthumb'  => 73,
+       'beforetitle'  => '<h3>',
+       'aftertitle'   => '</h3>',
+	   'offset'	      => '0', 
+	   'category'	   => '3' 
+   );
+topfeatured_posts_YIW( $args );  
+?>
+
+By default:
+ - the title is "Top Featured Posts"
+ - the posts shown are 5
+ - thumbnail's width and height is 73 pixel
+ - the title is wrapped with an H3 tag
+
 Parameters
 
 **title**
@@ -60,7 +80,7 @@ Parameters
 (integer) @mj: skipp number of posts from beginning
 
 ** category **
-@mj: category (-R) of posts should select, '' for all categories
+(integer) @mj: category (-R) of posts should select, '' for all categories
 
 -------------------------------------------------------------------------------
 
