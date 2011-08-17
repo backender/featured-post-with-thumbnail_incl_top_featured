@@ -88,7 +88,12 @@ function topfeatured_posts_YIW( $args = null ) {
        'widththumb'   => 73,
        'heightthumb'  => 73,
        'beforetitle'  => '<h3>',
-       'aftertitle'   => '</h3>'
+       'aftertitle'   => '</h3>',
+       /* @mj: offset, category are some new features can be used
+        * see info_function.txt for example
+        */
+       'category'	  => '',
+       'offset'		  => '0'
    );
 
    $fp = wp_parse_args($args, $defaults);
@@ -100,7 +105,9 @@ function topfeatured_posts_YIW( $args = null ) {
    $height_thumb = $fp['heightthumb'];
    $before_title = $fp['beforetitle'];
    $after_title	 = $fp['aftertitle'];
-
+   // @mj: declare new vars
+   $category	 = $fp['category'];
+   $offset		 = $fp['offset'];
 
 
 
@@ -115,7 +122,7 @@ function topfeatured_posts_YIW( $args = null ) {
     * Info: http://codex.wordpress.org/Template_Tags/get_posts
     */
    global $post;
-   $featured_posts = get_posts('meta_key=topfeatured&meta_value=1&numberposts='.$showposts.'&orderby='.$orderby); //@mj: meta_key changed to "topfeatured"
+   $featured_posts = get_posts('meta_key=topfeatured&meta_value=1&numberposts='.$showposts.'&orderby='.$orderby.'&offset='.$offset.'&category='.$category); //@mj: meta_key changed to "topfeatured", @mj: there we use offset and category 
 
    echo '<ul class="clearfix">';
    foreach ($featured_posts as $post):
@@ -154,7 +161,12 @@ function featured_posts_YIW( $args = null ) {
        'widththumb'   => 73,
        'heightthumb'  => 73,
        'beforetitle'  => '<h3>',
-       'aftertitle'   => '</h3>'
+       'aftertitle'   => '</h3>',
+       /* @mj: offset, category are some new features can be used
+        * see info_function.txt for example
+        */
+       'category'	  => '',
+       'offset'		  => '0'
    );
 
    $fp = wp_parse_args($args, $defaults);
@@ -166,7 +178,9 @@ function featured_posts_YIW( $args = null ) {
    $height_thumb = $fp['heightthumb'];
    $before_title = $fp['beforetitle'];
    $after_title	 = $fp['aftertitle'];
-
+   // @mj: declare new vars
+   $category	 = $fp['category'];
+   $offset		 = $fp['offset'];
 
 
 
@@ -181,7 +195,8 @@ function featured_posts_YIW( $args = null ) {
     * Info: http://codex.wordpress.org/Template_Tags/get_posts
     */
    global $post;
-   $featured_posts = get_posts('meta_key=featured&meta_value=1&numberposts='.$showposts.'&orderby='.$orderby);
+   //$featured_posts = get_posts('meta_key=featured&meta_value=1&numberposts='.$showposts.'&orderby='.$orderby);
+   $featured_posts = get_posts('meta_key=featured&meta_value=1&numberposts='.$showposts.'&orderby='.$orderby.'&offset='.$offset.'&category='.$category); // @mj: there we use offset and category
 
    echo '<ul class="clearfix">';
    foreach ($featured_posts as $post):
