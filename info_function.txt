@@ -8,7 +8,9 @@ $args = array(
        'widththumb'   => 73,
        'heightthumb'  => 73,
        'beforetitle'  => '<h3>',
-       'aftertitle'   => '</h3>'
+       'aftertitle'   => '</h3>',
+	   'offset'	      => '0', 
+	   'category'	   => '3' 
    );
 featured_posts_YIW( $args );   
 
@@ -54,7 +56,11 @@ Parameters
 **beforetitle - aftertitle**
 (string) Sets wrap tag for the title
 
+** offset **
+(integer) @mj: skipp number of posts from beginning
 
+** category **
+@mj: category (-R) of posts should select, '' for all categories
 
 -------------------------------------------------------------------------------
 
