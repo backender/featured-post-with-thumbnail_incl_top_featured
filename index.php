@@ -141,10 +141,8 @@ function topfeatured_posts_YIW( $args = null ) {
    endforeach;
    echo "</ul>";
 }
-?>
 
 
-<?
 /**
  *
  * Mostra i post in evidenza
