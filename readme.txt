@@ -1,11 +1,11 @@
 === Plugin Name ===
 
-Contributors: Nando Pappalardo e Giustino Borzacchiello
+Contributors: Nando Pappalardo e Giustino Borzacchiello e Marc Juchli
 Donate link: https://www.paypal.com/it/cgi-bin/webscr?cmd=_flow&SESSION=QeFc087zjhKgcjE1wZC3BgVJq7aKowY7yN3xb2letu-oS9GgkUtYkXl95nC&dispatch=5885d80a13c0db1fc53a056acd1538874a43d73a07f26b2caf7353d6a9263490
 Tags: Post, Posts, highlight, widget, thumbnail, Featured Post with Thumbnail, Featured Post, Post, highlighting best articles,
 Requires at least: 2.8, PHP4 & PHP5
 Tested up to: 2.9
-Stable tag: 1.4
+Stable tag: 1.5
  
 A really simple way of putting featured posts on your website.
 
@@ -49,6 +49,11 @@ Answer to foo bar dilemma.
 3. Widget Featured Posts in action
 
 == Changelog ==
+
+= 1.5 =
+* add: additional top featured post
+* add: offset in meta_key
+* add: category in meta_key
 
 = 1.4 = 
 
